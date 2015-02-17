@@ -233,7 +233,7 @@ public class AndroidDashboardDesignActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				
-				Intent i = new Intent(getApplicationContext(), Verbal.class);
+				Intent i = new Intent(getApplicationContext(), Quantitative.class);
 				startActivity(i);
 			}
 		});

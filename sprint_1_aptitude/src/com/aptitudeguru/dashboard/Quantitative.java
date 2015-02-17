@@ -1,4 +1,5 @@
-xpackage com.aptitudeguru.dashboard;
+package com.aptitudeguru.dashboard;
+
 
 import android.app.Activity;
 

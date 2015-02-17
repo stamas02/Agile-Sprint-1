@@ -178,7 +178,7 @@ public class ShowScore extends Activity{
       index1=0;
       index2=0;
       if(yourans[index1]==0)
-    	  btn_score1.setBackgroundColor(Color.BLUE);
+    	  btn_score1.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score1.setBackgroundColor(Color.GREEN);
@@ -192,7 +192,7 @@ public class ShowScore extends Activity{
       index2++;
       
       if(yourans[index1]==0)
-    	  btn_score2.setBackgroundColor(Color.BLUE);
+    	  btn_score2.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score2.setBackgroundColor(Color.GREEN);
@@ -207,7 +207,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score3.setBackgroundColor(Color.BLUE);
+    	  btn_score3.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score3.setBackgroundColor(Color.GREEN);
@@ -221,7 +221,7 @@ public class ShowScore extends Activity{
       index2++;
       
       if(yourans[index1]==0)
-    	  btn_score4.setBackgroundColor(Color.BLUE);
+    	  btn_score4.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score4.setBackgroundColor(Color.GREEN);
@@ -234,7 +234,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score5.setBackgroundColor(Color.BLUE);
+    	  btn_score5.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score5.setBackgroundColor(Color.GREEN);
@@ -247,7 +247,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score6.setBackgroundColor(Color.BLUE);
+    	  btn_score6.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score6.setBackgroundColor(Color.GREEN);
@@ -261,7 +261,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score7.setBackgroundColor(Color.BLUE);
+    	  btn_score7.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score7.setBackgroundColor(Color.GREEN);
@@ -274,7 +274,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score8.setBackgroundColor(Color.BLUE);
+    	  btn_score8.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score8.setBackgroundColor(Color.GREEN);
@@ -287,7 +287,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score9.setBackgroundColor(Color.BLUE);
+    	  btn_score9.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score9.setBackgroundColor(Color.GREEN);
@@ -301,7 +301,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score10.setBackgroundColor(Color.BLUE);
+    	  btn_score10.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score10.setBackgroundColor(Color.GREEN);
@@ -315,7 +315,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score11.setBackgroundColor(Color.BLUE);
+    	  btn_score11.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score11.setBackgroundColor(Color.GREEN);
@@ -328,7 +328,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score12.setBackgroundColor(Color.BLUE);
+    	  btn_score12.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score12.setBackgroundColor(Color.GREEN);
@@ -343,7 +343,7 @@ public class ShowScore extends Activity{
       index2++;
       
       if(yourans[index1]==0)
-    	  btn_score13.setBackgroundColor(Color.BLUE);
+    	  btn_score13.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score13.setBackgroundColor(Color.GREEN);
@@ -356,7 +356,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score14.setBackgroundColor(Color.BLUE);
+    	  btn_score14.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score14.setBackgroundColor(Color.GREEN);
@@ -370,7 +370,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score15.setBackgroundColor(Color.BLUE);
+    	  btn_score15.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score15.setBackgroundColor(Color.GREEN);
@@ -384,7 +384,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score16.setBackgroundColor(Color.BLUE);
+    	  btn_score16.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score16.setBackgroundColor(Color.GREEN);
@@ -398,7 +398,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score17.setBackgroundColor(Color.BLUE);
+    	  btn_score17.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score17.setBackgroundColor(Color.GREEN);
@@ -412,7 +412,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score18.setBackgroundColor(Color.BLUE);
+    	  btn_score18.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score18.setBackgroundColor(Color.GREEN);
@@ -426,7 +426,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score19.setBackgroundColor(Color.BLUE);
+    	  btn_score19.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score19.setBackgroundColor(Color.GREEN);
@@ -440,7 +440,7 @@ public class ShowScore extends Activity{
       
       index2++;
       if(yourans[index1]==0)
-    	  btn_score20.setBackgroundColor(Color.BLUE);
+    	  btn_score20.setBackgroundColor(Color.GRAY);
       
       else if(yourans[index1]==givenans[index2])
     	  btn_score20.setBackgroundColor(Color.GREEN);
