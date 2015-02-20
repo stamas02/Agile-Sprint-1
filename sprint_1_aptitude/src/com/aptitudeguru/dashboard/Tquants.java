@@ -197,52 +197,6 @@ public class Tquants extends Activity {
 			}
 		});
 
-		/*Button btn_q14 = (Button) findViewById(R.id.btn_q1);
-
-		 
-		btn_q13.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				 
-				 
-	             AssetManager assetManager = getAssets();
-
-	             InputStream in = null;
-	             OutputStream out = null;
-	             File file = new File(getFilesDir(), "sec14.pdf");
-	             try {
-	                 in = assetManager.open("sec14.pdf");
-	                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-	                 copyFile(in, out);
-	                 in.close();
-	                 in = null;
-	                 out.flush();
-	                 out.close();
-	                 out = null;
-	             } catch (Exception e) {
-	                 Log.e("tag", e.getMessage());
-	             }
-
-	             Intent intent = new Intent(Intent.ACTION_VIEW);
-	             intent.setDataAndType(
-	                     Uri.parse("file://" + getFilesDir() + "/sec14.pdf"),
-	                     "application/pdf");
-
-	             startActivity(intent);
-	   }
-	             private void copyFile(InputStream in, OutputStream out) throws IOException {
-	     	        byte[] buffer = new byte[1024];
-	     	        int read;
-	     	        while ((read = in.read(buffer)) != -1) {
-	     	            out.write(buffer, 0, read);
-	     	        }
-	         
-				
-			}
-		});*/
-
 		 
 		Button btn_q15 = (Button) findViewById(R.id.btn_q15);
 
@@ -254,38 +208,7 @@ public class Tquants extends Activity {
 				 
 				 
 	             AssetManager assetManager = getAssets();
-
-	             InputStream in = null;
-	             OutputStream out = null;
-	             File file = new File(getFilesDir(), "sec15.pdf");
-	             try {
-	                 in = assetManager.open("sec15.pdf");
-	                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-	                 copyFile(in, out);
-	                 in.close();
-	                 in = null;
-	                 out.flush();
-	                 out.close();
-	                 out = null;
-	             } catch (Exception e) {
-	                 Log.e("tag", e.getMessage());
-	             }
-
-	             Intent intent = new Intent(Intent.ACTION_VIEW);
-	             intent.setDataAndType(
-	                     Uri.parse("file://" + getFilesDir() + "/sec15.pdf"),
-	                     "application/pdf");
-
-	             startActivity(intent);
-	   }
-	             private void copyFile(InputStream in, OutputStream out) throws IOException {
-	     	        byte[] buffer = new byte[1024];
-	     	        int read;
-	     	        while ((read = in.read(buffer)) != -1) {
-	     	            out.write(buffer, 0, read);
-	     	        }
-	         
+	             DisplayQuantPDF("sec15");
 				
 			}
 		});
@@ -296,43 +219,9 @@ public class Tquants extends Activity {
 		btn_q16.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View view) {
-				 
-				   AssetManager assetManager = getAssets();
-
-		             InputStream in = null;
-		             OutputStream out = null;
-		             File file = new File(getFilesDir(), "sec16.pdf");
-		             try {
-		                 in = assetManager.open("sec16.pdf");
-		                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-		                 copyFile(in, out);
-		                 in.close();
-		                 in = null;
-		                 out.flush();
-		                 out.close();
-		                 out = null;
-		             } catch (Exception e) {
-		                 Log.e("tag", e.getMessage());
-		             }
-
-		             Intent intent = new Intent(Intent.ACTION_VIEW);
-		             intent.setDataAndType(
-		                     Uri.parse("file://" + getFilesDir() + "/sec16.pdf"),
-		                     "application/pdf");
-
-		             startActivity(intent);
-		   }
-		             private void copyFile(InputStream in, OutputStream out) throws IOException {
-		     	        byte[] buffer = new byte[1024];
-		     	        int read;
-		     	        while ((read = in.read(buffer)) != -1) {
-		     	            out.write(buffer, 0, read);
-		     	        }
-		         
-					
-				}
+			public void onClick(View view) { 
+				DisplayQuantPDF("sec16");	
+			}
 			
 		});
 
@@ -343,45 +232,11 @@ public class Tquants extends Activity {
 		btn_q17.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View view) {
-				 
-				   AssetManager assetManager = getAssets();
-
-		             InputStream in = null;
-		             OutputStream out = null;
-		             File file = new File(getFilesDir(), "sec17.pdf");
-		             try {
-		                 in = assetManager.open("sec17.pdf");
-		                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-		                 copyFile(in, out);
-		                 in.close();
-		                 in = null;
-		                 out.flush();
-		                 out.close();
-		                 out = null;
-		             } catch (Exception e) {
-		                 Log.e("tag", e.getMessage());
-		             }
-
-		             Intent intent = new Intent(Intent.ACTION_VIEW);
-		             intent.setDataAndType(
-		                     Uri.parse("file://" + getFilesDir() + "/sec17.pdf"),
-		                     "application/pdf");
-
-		             startActivity(intent);
-		   }
-		             private void copyFile(InputStream in, OutputStream out) throws IOException {
-		     	        byte[] buffer = new byte[1024];
-		     	        int read;
-		     	        while ((read = in.read(buffer)) != -1) {
-		     	            out.write(buffer, 0, read);
-		     	        }
-		         
-					
-				
+			public void onClick(View view) {		 
+				DisplayQuantPDF("sec17");	
 			}
 		});
+		
 		Button btn_home = (Button) findViewById(R.id.btn_home);
 
 		// Dashboard Friends button

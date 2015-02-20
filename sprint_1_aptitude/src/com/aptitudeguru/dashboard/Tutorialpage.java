@@ -123,74 +123,7 @@ public class Tutorialpage extends Activity implements OnTouchListener {
 	             Button btn_about = (Button) findViewById(R.id.btn_about);
 	             Button btn_help = (Button) findViewById(R.id.btn_help);
 	             
-	             
-	             
-	             
 
-		    		/*btn_c.setOnClickListener(new View.OnClickListener() {
-		    		//public void displayPDF(String btnName, new View.OnCLickListener() { 
-		    		
-		    			@Override
-		    			public void onClick(View view) {
-		    				
-		    				
-		    				String btnName = "";
-		    				
-		    				// for loop for generating button and file names
-		    				String[] buttonNames = new String[2];
-		    				buttonNames[0] = "cpp";
-		    				buttonNames[1] = "java";
-		    				buttonNames[2] = "asd";
-		    				buttonNames[3] = "asd";
-		    				
-		    				for (int i=0; i<2; i++) {
-		    					btnName = buttonNames[i];
-		    				}
-
-
-		    				 AssetManager assetManager = getAssets();
-			             InputStream in = null;
-				             OutputStream out = null;
-				             File file = new File(getFilesDir(), btnName + ".pdf");
-				             try {
-				                 in = assetManager.open(btnName + ".pdf");
-				                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-				                 copyFile(in, out);
-				                 in.close();
-				                 in = null;
-				                 out.flush();
-				                 out.close();
-				                 out = null;
-				             } catch (Exception e) {
-				                 Log.e("tag", e.getMessage());
-				             }
-
-				             Intent intent = new Intent(Intent.ACTION_VIEW);
-				             intent.setDataAndType(
-				                     Uri.parse("file://" + getFilesDir() + "/" + btnName + ".pdf"),
-				                     "application/pdf");
-
-				             startActivity(intent);
-				   }
-				             private void copyFile(InputStream in, OutputStream out) throws IOException {
-				     	        byte[] buffer = new byte[1024];
-				     	        int read;
-				     	        while ((read = in.read(buffer)) != -1) {
-				     	            out.write(buffer, 0, read);
-				     	        }
-				         
-							
-						
-		    			}
-		    		});*/
-		    		
-	             
-	             
-	             
-	             
-	             
-	     		
 	     		btn_help.setOnClickListener(new View.OnClickListener() {
 
 	     			@Override
