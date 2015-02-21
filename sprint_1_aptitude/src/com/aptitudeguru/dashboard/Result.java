@@ -124,18 +124,19 @@ public class Result extends Activity {
 		givenans = bundle.getIntArray("givenans");
 		allid = bundle.getIntArray("allid");
 
-		QuantsTable q = db.getQuants(id, cat);
+		
+		QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
 
 		final Button btn_next = (Button) findViewById(R.id.btn_next);
 		final Button btn_prev = (Button) findViewById(R.id.btn_prev);
 		btn_prev.setEnabled(true);
 		final Button btn_finish = (Button) findViewById(R.id.btn_finish);
-		String j = q.getQues();
-		String opt1 = q.getOption1();
-		String opt2 = q.getOption2();
-		String opt3 = q.getOption3();
-		String opt4 = q.getOption4();
-		String sol = q.getSol();
+		String j = q.getQuestion();
+		String opt1 = q.getOptions()[0];
+		String opt2 = q.getOptions()[1];
+		String opt3 = q.getOptions()[2];
+		String opt4 = q.getOptions()[3];
+		String sol = q.getSolution();
 
 		t1 = (TextView) findViewById(R.id.quest1);
 		t2 = (TextView) findViewById(R.id.op1);
@@ -179,12 +180,12 @@ public class Result extends Activity {
 					btn_prev.setEnabled(true);
 					current = current + 1;
 					id = allid[current];
-					QuantsTable q = db.getQuants(id, cat);
-					String j = q.getQues();
-					String opt1 = q.getOption1();
-					String opt2 = q.getOption2();
-					String opt3 = q.getOption3();
-					String opt4 = q.getOption4();
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
+					String j = q.getQuestion();
+					String opt1 = q.getOptions()[0];
+					String opt2 = q.getOptions()[1];
+					String opt3 = q.getOptions()[2];
+					String opt4 = q.getOptions()[3];
 
 					t1 = (TextView) findViewById(R.id.quest1);
 					t2 = (TextView) findViewById(R.id.op1);
@@ -193,7 +194,7 @@ public class Result extends Activity {
 					t5 = (TextView) findViewById(R.id.op4);
 					t6 = (TextView) findViewById(R.id.selans);
 					t7 = (TextView) findViewById(R.id.corrans);
-					String sol = q.getSol();
+					String sol = q.getSolution();
 					t1.setText(j);
 					t2.setText("1." + opt1);
 					t3.setText("2." + opt2);
@@ -232,13 +233,13 @@ public class Result extends Activity {
 					btn_prev.setEnabled(true);
 					current = current - 1;
 					id = allid[current];
-					QuantsTable q = db.getQuants(id, cat);
-					String j = q.getQues();
-					String opt1 = q.getOption1();
-					String opt2 = q.getOption2();
-					String opt3 = q.getOption3();
-					String opt4 = q.getOption4();
-					String sol = q.getSol();
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
+					String j = q.getQuestion();
+					String opt1 = q.getOptions()[0];
+					String opt2 = q.getOptions()[1];
+					String opt3 = q.getOptions()[2];
+					String opt4 = q.getOptions()[3];
+					String sol = q.getSolution();
 					t1 = (TextView) findViewById(R.id.quest1);
 					t2 = (TextView) findViewById(R.id.op1);
 					t3 = (TextView) findViewById(R.id.op2);

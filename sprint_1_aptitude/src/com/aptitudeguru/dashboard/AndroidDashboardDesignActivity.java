@@ -210,8 +210,8 @@ public class AndroidDashboardDesignActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 			
-				Intent i = new Intent(getApplicationContext(),
-						Quantitative.class);
+				Intent i = new Intent(getApplicationContext(),SubcategoryListPage.class);
+				i.putExtra("proper_category_name", TABLE_NAMES.QUANTITIVE_TABLE.ordinal());
 				startActivity(i);
 			}
 		});
@@ -233,7 +233,8 @@ public class AndroidDashboardDesignActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				
-				Intent i = new Intent(getApplicationContext(), Quantitative.class);
+				Intent i = new Intent(getApplicationContext(),SubcategoryListPage.class);
+				i.putExtra("proper_category_name", TABLE_NAMES.TABLE_VL.ordinal());
 				startActivity(i);
 			}
 		});
@@ -245,7 +246,7 @@ public class AndroidDashboardDesignActivity extends Activity {
 			public void onClick(View view) {
 				
 				Intent i = new Intent(getApplicationContext(),
-						ComputerFundamentals.class);
+						SubcategoryListPage.class);
 				startActivity(i);
 			}
 		});

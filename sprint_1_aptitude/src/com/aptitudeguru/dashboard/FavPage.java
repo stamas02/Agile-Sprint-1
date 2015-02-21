@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidhive.dashboard.R;
 
 public class FavPage extends Activity {
+	/*
 	TextView t1, t2, t3, t4, t5, t6;
 	Button removefav;
 	String ques, op1, op2, op3, op4, sol;
@@ -419,5 +420,5 @@ public class FavPage extends Activity {
 			});
 		}
 
-	}
+	}*/
 }

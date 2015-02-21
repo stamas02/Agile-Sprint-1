@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Hashtable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +18,8 @@ import android.widget.Button;
 import androidhive.dashboard.R;
 
 public class Tquants extends Activity {
+	
+	
 	
 	//This method takes the name of the PDF and displays it to the user. 
     public void DisplayQuantPDF(String btnName) {
@@ -58,8 +61,19 @@ public class Tquants extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.news_feed_layout);
 		
+		/* make a hash table for the names and secs pairs
+		Hashtable btns = new Hashtable();
+		for (int i = 1; i < 18; i++) {
+			btns.put("btn_q" + i, "sec" + i);
+		}
 		
-		// Sec 9 and sec 3 are missing..?
+		//setup all the buttons
+		for(int i = 1; i<18; i++) {
+			String btn = "btn_q" + i; 
+			Button i  = (Button) findViewById(R.id.btn_q1); // get the key fro the hashtable and use it a the string's name
+		}
+		
+		*/// Sec 3,9 and 14 are missing
      
 		
 		Button btn_q1 = (Button) findViewById(R.id.btn_q1);
@@ -206,8 +220,6 @@ public class Tquants extends Activity {
 			@Override
 			public void onClick(View view) {
 				 
-				 
-	             AssetManager assetManager = getAssets();
 	             DisplayQuantPDF("sec15");
 				
 			}

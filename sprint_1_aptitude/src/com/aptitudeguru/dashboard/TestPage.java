@@ -29,7 +29,7 @@ public class TestPage extends Activity implements OnClickListener
 
 {
 	TextView t1, t2;
-	RadioButton b1, b2, b3, b4;
+	RadioButton[] options_radiobutton = new RadioButton[4];
 	int count = 1;
 	int start = 1;
 	int quesvisible = 0;
@@ -80,9 +80,7 @@ public class TestPage extends Activity implements OnClickListener
 	protected void onPause() {
 		// Always call the superclass method first
 		super.onPause();
-
 		countDownTimer.cancel();
-
 		// Activity being restarted from stopped state
 	}
 
@@ -150,42 +148,52 @@ public class TestPage extends Activity implements OnClickListener
 			btn_next.setVisibility(View.VISIBLE);
 			btn_prev.setVisibility(View.VISIBLE);
 		}
-		b1.setChecked(false);
-		b2.setChecked(false);
-		b3.setChecked(false);
-		b4.setChecked(false);
+		
+		for (RadioButton rb : options_radiobutton)
+			rb.setChecked(false);
 
 		RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 		radiogroup.clearCheck();
 		int check = b[click];
-		if (check == 1)
-			b1.setChecked(true);
-		else if (check == 2)
-			b2.setChecked(true);
-		else if (check == 3)
-			b3.setChecked(true);
-		else if (check == 4)
-			b4.setChecked(true);
-		else {
-		}
+		
+		options_radiobutton[check].setChecked(true);
 
-		QuantsTable q = db.getQuants(j2, cat);
+		QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE, j2, cat);
 		// i=i+1;
-		String j = q.getQues();
+		String j = q.getQuestion();
 		t1.setText(j);
 		t2.setText("   " + (j1 + 1) + "/20");
-		String opt1 = q.getOption1();
-		String opt2 = q.getOption2();
-		String opt3 = q.getOption3();
-		String opt4 = q.getOption4();
+		
+		String[] options = q.getOptions();
 
-		b1.setText(opt1);
-		b2.setText(opt2);
-		b3.setText(opt3);
-		b4.setText(opt4);
-
+		
+		for (RadioButton rb : options_radiobutton)
+			rb.setChecked(false);
+		
+		for (int i = 0; i < options.length; i++)
+			options_radiobutton[i].setText(options[i]);
 	}
 
+	
+	private void setUpQuestion(QuestionRecord q)
+	{
+		String[] options = q.getOptions();
+		
+		for (RadioButton rb : options_radiobutton)
+			rb.setChecked(false);
+		
+		for (int i = 0; i < options.length; i++)
+			options_radiobutton[i].setText(options[i]);
+	}
+	
+	
+	private void clearRadiobuttons (RadioButton[] radiobuttons)
+	{
+		for (RadioButton rb : radiobuttons)
+			rb.setChecked(false);
+	}
+	
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test);
@@ -194,11 +202,13 @@ public class TestPage extends Activity implements OnClickListener
 		cat = bundle.getString("cat");
 		start = bundle.getInt("start");
 
-		b1 = (RadioButton) findViewById(R.id.option1);
-		b2 = (RadioButton) findViewById(R.id.option2);
-		b3 = (RadioButton) findViewById(R.id.option3);
-		b4 = (RadioButton) findViewById(R.id.option4);
-
+		
+		
+		options_radiobutton[0] = (RadioButton) findViewById(R.id.option1);
+		options_radiobutton[1] = (RadioButton) findViewById(R.id.option2);
+		options_radiobutton[2] = (RadioButton) findViewById(R.id.option3);
+		options_radiobutton[3] = (RadioButton) findViewById(R.id.option4);
+		
 		text = (TextView) this.findViewById(R.id.timer);
 		countDownTimer = new MyCountDownTimer(startTime, interval);
 
@@ -317,28 +327,16 @@ public class TestPage extends Activity implements OnClickListener
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				// RadioButton r1=(RadioButton)findViewById(R.id.option1);
-				if (b1.isChecked()) {
-					b[click] = 1;
-					ans[click] = 1;
-					gotoclick[click] = 1;
-					// //String j=1+"";
-					// btn_cal+j.setBackgroundColor(Color.RED);
-
-				} else if (b2.isChecked()) {
-					b[click] = 2;
-					ans[click] = 2;
-					gotoclick[click] = 1;
-				} else if (b3.isChecked()) {
-					b[click] = 3;
-					ans[click] = 3;
-					gotoclick[click] = 1;
-				} else if (b4.isChecked()) {
-					b[click] = 4;
-					ans[click] = 4;
-					gotoclick[click] = 1;
-				} else {
+				
+				for (int i = 0; i < options_radiobutton.length; i++)
+				{
+					if (options_radiobutton[i].isChecked())
+					{
+						b[click] = i+1;
+						ans[click] = i+1;
+						gotoclick[click] = 1;
+					}
 				}
-
 			}
 
 		});
@@ -432,14 +430,11 @@ public class TestPage extends Activity implements OnClickListener
 				// startActivity(i);
 
 				int val = a[click];
-				QuantsTable q = db.getQuants(val, cat);
-				String ques = q.getQues();
-				String op1 = q.getOption1();
-				String op2 = q.getOption2();
-				String op3 = q.getOption3();
-				String op4 = q.getOption4();
-				String sol = q.getSol();
-				db.addFav(new Favourite(ques, op1, op2, op3, op4, sol));
+				QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE, val, cat);
+				String ques = q.getQuestion();
+				String[] options = q.getOptions();
+				String sol = q.getSolution();
+				//db.addQuestion(new Favourite(ques, options, sol));
 
 				Toast.makeText(getApplicationContext(), "Added To Favourite",
 						Toast.LENGTH_SHORT).show();
@@ -448,6 +443,8 @@ public class TestPage extends Activity implements OnClickListener
 
 			}
 		});
+
+		
 
 		// Listening Messages button click
 		btn_hint.setOnClickListener(new View.OnClickListener() {
@@ -477,8 +474,9 @@ public class TestPage extends Activity implements OnClickListener
 		// Listening to Events button click
 
 		int g = 0;
-		List<QuantsTable> quants = db.getAllQuants(cat);
-		for (QuantsTable cn : quants) {
+		
+		List<QuestionRecord> quants = db.getQuestions(TABLE_NAMES.QUANTITIVE_TABLE, cat);
+		for (QuestionRecord cn : quants) {
 
 			if (g == 38)
 				break;
@@ -486,7 +484,7 @@ public class TestPage extends Activity implements OnClickListener
 				g++;
 
 				count = cn.getID();
-				String sol1 = cn.getSol();
+				String sol1 = cn.getSolution();
 				int sol = 0;
 				if (sol1.equalsIgnoreCase("a"))
 					sol = 1;
@@ -514,21 +512,15 @@ public class TestPage extends Activity implements OnClickListener
 		btn_next = (Button) findViewById(R.id.btn_next);
 		btn_prev = (Button) findViewById(R.id.btn_prev);
 
-		QuantsTable q = db.getQuants(initial[count], cat);
+		QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,initial[count], cat);
 
 		a[index++] = initial[count];
 		givenans[0] = initans[count];
 		t2.setText("   " + "1/20");
-		String j = q.getQues();
-		String opt1 = q.getOption1();
-		String opt2 = q.getOption2();
-		String opt3 = q.getOption3();
-		String opt4 = q.getOption4();
+		String j = q.getQuestion();
+
 		t1.setText(j);
-		b1.setText(opt1);
-		b2.setText(opt2);
-		b3.setText(opt3);
-		b4.setText(opt4);
+		setUpQuestion(q);
 		btn_next.setVisibility(View.VISIBLE);
 		btn_prev.setVisibility(View.INVISIBLE);
 		for (int x = 1; x < 20; x++) {
@@ -553,10 +545,9 @@ public class TestPage extends Activity implements OnClickListener
 					btn_prev.setEnabled(true);
 					btn_next.setVisibility(View.VISIBLE);
 					btn_prev.setVisibility(View.VISIBLE);
-					b1.setChecked(false);
-					b2.setChecked(false);
-					b3.setChecked(false);
-					b4.setChecked(false);
+					
+					clearRadiobuttons(options_radiobutton);
+					
 					RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 					radiogroup.clearCheck();
 
@@ -566,33 +557,18 @@ public class TestPage extends Activity implements OnClickListener
 
 					int val = a[click];
 					int check = b[click];
-					if (check == 1)
-						b1.setChecked(true);
-					else if (check == 2)
-						b2.setChecked(true);
-					else if (check == 3)
-						b3.setChecked(true);
-					else if (check == 4)
-						b4.setChecked(true);
-					else {
-					}
+					
+					options_radiobutton[check+1].setChecked(true);
+
 					t2.setText("   " + (click + 1) + "/20");
 
-					QuantsTable q = db.getQuants(val, cat);
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,val, cat);
 					// i=i+1;
-					String j = q.getQues();
+					String j = q.getQuestion();
 					t1.setText(j);
 
-					String opt1 = q.getOption1();
-					String opt2 = q.getOption2();
-					String opt3 = q.getOption3();
-					String opt4 = q.getOption4();
-					// t1.setText();
-					b1.setText(opt1);
-					b2.setText(opt2);
-					b3.setText(opt3);
-					b4.setText(opt4);
-					// radiogroup.setOnCheckedChangeListener(this);
+					
+					setUpQuestion(q);
 
 				}
 
@@ -614,41 +590,23 @@ public class TestPage extends Activity implements OnClickListener
 					btn_next.setEnabled(true);
 					btn_next.setVisibility(View.VISIBLE);
 					btn_prev.setVisibility(View.VISIBLE);
-					b1.setChecked(false);
-					b2.setChecked(false);
-					b3.setChecked(false);
-					b4.setChecked(false);
+					clearRadiobuttons(options_radiobutton);
 					RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 					radiogroup.clearCheck();
 
 					click = click - 1;
 					int val = a[click];
 					int check = b[click];
-					if (check == 1)
-						b1.setChecked(true);
-					else if (check == 2)
-						b2.setChecked(true);
-					else if (check == 3)
-						b3.setChecked(true);
-					else if (check == 4)
-						b4.setChecked(true);
-					else {
-					}
+					
+					options_radiobutton[check+1].setChecked(true);
 
-					QuantsTable q = db.getQuants(val, cat);
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,val, cat);
 					// i=i+1;
-					String j = q.getQues();
+					String j = q.getQuestion();
 					t1.setText(j);
 					t2.setText("   " + (click + 1) + "/20");
-					String opt1 = q.getOption1();
-					String opt2 = q.getOption2();
-					String opt3 = q.getOption3();
-					String opt4 = q.getOption4();
 					t1.setText(j);
-					b1.setText(opt1);
-					b2.setText(opt2);
-					b3.setText(opt3);
-					b4.setText(opt4);
+					setUpQuestion(q);
 
 				}
 			}
