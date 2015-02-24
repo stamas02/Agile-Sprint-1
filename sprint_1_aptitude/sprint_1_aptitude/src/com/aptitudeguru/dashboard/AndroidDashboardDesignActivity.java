@@ -211,6 +211,7 @@ public class AndroidDashboardDesignActivity extends Activity {
 			public void onClick(View view) {
 				Intent i = new Intent(getApplicationContext(),SubcategoryListPage.class);
 				i.putExtra("test_category", TABLE_NAMES.QUANTITIVE_TABLE.ordinal());
+				i.putExtra("activity_type", "Test");
 				startActivity(i);
 			}
 		});
