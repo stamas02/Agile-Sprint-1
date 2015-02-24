@@ -1,4 +1,4 @@
-package Test;
+package com.aptitudeguru.dashboard.tests;
 
 import java.util.List;
 
