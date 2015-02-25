@@ -155,10 +155,13 @@ public class SubcategoryListPage extends Activity {
 			sub_category = "v";
 			category_names = getResources().getStringArray(R.array.v_test_category_names);
 			
-		}		
-		for (int i = 0; i < category_names.length; i++)
-			button_subcategorys.add(createOneButton(category_names[i],sub_category+(i+1)));
+		}	
 		
+		
+		for (int i = 0; i < category_names.length; i++)
+		{
+			button_subcategorys.add(createOneButton(category_names[i],sub_category+(i+1)));
+		}
 		
 		
 		

@@ -58,6 +58,46 @@ public class Tutorialpage extends Activity implements OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
+    
+    
+    // a function that was repeated in every single button to just open the pdf
+    public void displayPDF(String btnName){
+		 AssetManager assetManager = getAssets();
+		 
+        InputStream in = null;
+            OutputStream out = null;
+            File file = new File(getFilesDir(), btnName + ".pdf");
+            try {
+                in = assetManager.open(btnName + ".pdf");
+                out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
+
+                copyFile(in, out);
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+            } catch (Exception e) {
+                Log.e("tag", e.getMessage());
+            }
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(
+                    Uri.parse("file://" + getFilesDir() + "/" + btnName + ".pdf"),
+                    "application/pdf");
+
+            startActivity(intent);
+  }
+            private void copyFile(InputStream in, OutputStream out) throws IOException {
+    	        byte[] buffer = new byte[1024];
+    	        int read;
+    	        while ((read = in.read(buffer)) != -1) {
+    	            out.write(buffer, 0, read);
+    	        }
+	}
+            
+    
+    
 	   @SuppressLint("NewApi")
 	@Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -151,8 +191,7 @@ public class Tutorialpage extends Activity implements OnTouchListener {
 	     			}
 	     		});
 	             
-	     		Button btn_quants = (Button) findViewById(R.id.btn_score_quants);
-	    		
+	     		Button btn_quants = (Button) findViewById(R.id.btn_score_quants);	    		
 	     		Button btn_c=(Button) findViewById(R.id.btn_score_c);
 	    		Button btn_cpp = (Button) findViewById(R.id.btn_score_cpp);
 	    		Button btn_java=(Button) findViewById(R.id.btn_score_java);
@@ -162,229 +201,63 @@ public class Tutorialpage extends Activity implements OnTouchListener {
 	    		Button btn_html = (Button) findViewById(R.id.btn_score_html);
 	    		Button btn_interview = (Button) findViewById(R.id.btn_score_interview);
 	    		
+	    		    		
 	    		btn_quants.setOnClickListener(new View.OnClickListener() {
-
 	    			@Override
 	    			public void onClick(View view) {
-
 	    				Intent i = new Intent(getApplicationContext(),SubcategoryListPage.class);
 	    				i.putExtra("test_category", TABLE_NAMES.QUANTITIVE_TABLE.ordinal());
 	    				i.putExtra("activity_type", "Tutorial");
 	    				startActivity(i);
 	    			}
 	    		});
+	    		
+	    		
+	    		// use function displayPDF to reduce code repetition:
 	    		btn_c.setOnClickListener(new View.OnClickListener() {
-
+	    			
 	    			@Override
-	    			public void onClick(View view) {
-
-
-	    				 AssetManager assetManager = getAssets();
-		             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "ctuts.pdf");
-			             try {
-			                 in = assetManager.open("ctuts.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/ctuts.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
-	    			}
+	    			public void onClick(View view) {	    				
+	    				displayPDF("ctuts");
+	    			}	    			
 	    		});
 
+	    		
+	    		
+	    		
+	    		
 	    		btn_cpp.setOnClickListener(new View.OnClickListener() {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				 AssetManager assetManager = getAssets();
-			             InputStream in = null;
-				             OutputStream out = null;
-				             File file = new File(getFilesDir(), "cpp.pdf");
-				             try {
-				                 in = assetManager.open("cpp.pdf");
-				                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-				                 copyFile(in, out);
-				                 in.close();
-				                 in = null;
-				                 out.flush();
-				                 out.close();
-				                 out = null;
-				             } catch (Exception e) {
-				                 Log.e("tag", e.getMessage());
-				             }
-
-				             Intent intent = new Intent(Intent.ACTION_VIEW);
-				             intent.setDataAndType(
-				                     Uri.parse("file://" + getFilesDir() + "/cpp.pdf"),
-				                     "application/pdf");
-
-				             startActivity(intent);
-				   }
-				             private void copyFile(InputStream in, OutputStream out) throws IOException {
-				     	        byte[] buffer = new byte[1024];
-				     	        int read;
-				     	        while ((read = in.read(buffer)) != -1) {
-				     	            out.write(buffer, 0, read);
-				     	        }
-				         
-							
-						
-		    			
+		    			displayPDF("cpp");
 	    			}
 	    		});
+	    		
+	    		
 	    		btn_java.setOnClickListener(new View.OnClickListener() {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				 AssetManager assetManager = getAssets();
-			             InputStream in = null;
-				             OutputStream out = null;
-				             File file = new File(getFilesDir(), "java.pdf");
-				             try {
-				                 in = assetManager.open("java.pdf");
-				                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-				                 copyFile(in, out);
-				                 in.close();
-				                 in = null;
-				                 out.flush();
-				                 out.close();
-				                 out = null;
-				             } catch (Exception e) {
-				                 Log.e("tag", e.getMessage());
-				             }
-
-				             Intent intent = new Intent(Intent.ACTION_VIEW);
-				             intent.setDataAndType(
-				                     Uri.parse("file://" + getFilesDir() + "/java.pdf"),
-				                     "application/pdf");
-
-				             startActivity(intent);
-				   }
-				             private void copyFile(InputStream in, OutputStream out) throws IOException {
-				     	        byte[] buffer = new byte[1024];
-				     	        int read;
-				     	        while ((read = in.read(buffer)) != -1) {
-				     	            out.write(buffer, 0, read);
-				     	        }
-				         
-							
-						
-		    			
+	    				displayPDF("java");
 	    			}
 	    		});
+	    		
 
 	    		btn_os.setOnClickListener(new View.OnClickListener() {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				
-	    				 AssetManager assetManager = getAssets();
-
-			             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "OS.pdf");
-			             try {
-			                 in = assetManager.open("OS.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/OS.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
+	    				displayPDF("OS");
 	    			}
 	    		});
+	    		
+	    		
 	    		btn_dbms.setOnClickListener(new View.OnClickListener() {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    			
-	    				 AssetManager assetManager = getAssets();
-
-			             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "database.pdf");
-			             try {
-			                 in = assetManager.open("database.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/database.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
+	    				displayPDF("database");
 	    			}
 	    		});
 
@@ -392,43 +265,7 @@ public class Tutorialpage extends Activity implements OnTouchListener {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				
-	    				 AssetManager assetManager = getAssets();
-
-			             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "DataStructure.pdf");
-			             try {
-			                 in = assetManager.open("DataStructure.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/DataStructure.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
+	    					   displayPDF("DataStructure"); 				
 	    			}
 	    		});
 
@@ -436,95 +273,17 @@ public class Tutorialpage extends Activity implements OnTouchListener {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				 AssetManager assetManager = getAssets();
-
-			             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "HTML.pdf");
-			             try {
-			                 in = assetManager.open("HTML.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/HTML.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
-	    			
+	    				displayPDF("HTML");
 	    			}
 	    		});
 	    		btn_interview.setOnClickListener(new View.OnClickListener() {
 
 	    			@Override
 	    			public void onClick(View view) {
-
-	    				 AssetManager assetManager = getAssets();
-
-			             InputStream in = null;
-			             OutputStream out = null;
-			             File file = new File(getFilesDir(), "Interview.pdf");
-			             try {
-			                 in = assetManager.open("Interview.pdf");
-			                 out = openFileOutput(file.getName(), Context.MODE_WORLD_READABLE);
-
-			                 copyFile(in, out);
-			                 in.close();
-			                 in = null;
-			                 out.flush();
-			                 out.close();
-			                 out = null;
-			             } catch (Exception e) {
-			                 Log.e("tag", e.getMessage());
-			             }
-
-			             Intent intent = new Intent(Intent.ACTION_VIEW);
-			             intent.setDataAndType(
-			                     Uri.parse("file://" + getFilesDir() + "/Interview.pdf"),
-			                     "application/pdf");
-
-			             startActivity(intent);
-			   }
-			             private void copyFile(InputStream in, OutputStream out) throws IOException {
-			     	        byte[] buffer = new byte[1024];
-			     	        int read;
-			     	        while ((read = in.read(buffer)) != -1) {
-			     	            out.write(buffer, 0, read);
-			     	        }
-			         
-						
-					
+	    				displayPDF("Interview");
 	    			}
-	    				
-	    			
 	    		});
 	    		
-	    		
-	    		
-	    		
-	         
 	   }
 	  
-
 }
