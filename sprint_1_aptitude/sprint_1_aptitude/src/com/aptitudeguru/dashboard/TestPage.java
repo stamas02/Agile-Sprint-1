@@ -35,14 +35,14 @@ public class TestPage extends Activity implements OnClickListener
 	int quesvisible = 0;
 	static int min = 0, sec = 0;;
 	int index1 = 0, index = 0, index3 = 0;
-	int b[] = new int[40];
+	int chacked_answers[] = new int[40];
 	int ans[] = new int[40];
 	int ansindex = 0;
 	// NewsFeedActivity n=new NewsFeedActivity();
 	String cat = "";
 	int test_category;
 	int click = 0;
-	int a[] = new int[40];
+	int question_ids[] = new int[40];
 	int initial[] = new int[40];
 	int initans[] = new int[40];
 	int givenans[] = new int[40];
@@ -60,10 +60,8 @@ public class TestPage extends Activity implements OnClickListener
 
 	// String category="7777";
 	private CountDownTimer countDownTimer;
-	private CountDownTimer countDownTimer1;
 
 	private boolean timerHasStarted = false;
-	private Button startB;
 	public TextView text;
 	private long startTime = 60 * 20 * 1000;
 	private final long interval = 1 * 1000;
@@ -124,7 +122,7 @@ public class TestPage extends Activity implements OnClickListener
 		String extraData = data.getStringExtra("ComingFrom");
 		int j1 = Integer.parseInt(extraData);
 
-		int j2 = a[j1];
+		int j2 = question_ids[j1];
 		click = j1;
 
 		if (click == 0) {
@@ -155,7 +153,7 @@ public class TestPage extends Activity implements OnClickListener
 
 		RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 		radiogroup.clearCheck();
-		int check = b[click];
+		int check = chacked_answers[click];
 		
 		options_radiobutton[check].setChecked(true);
 
@@ -204,7 +202,10 @@ public class TestPage extends Activity implements OnClickListener
 		test_category =  bundle.getInt("test_category");
 		start = bundle.getInt("start");
 
-		
+		for (int i = 0; i < chacked_answers.length; i++)
+		{
+			chacked_answers[i] = -1;
+		}
 		
 		options_radiobutton[0] = (RadioButton) findViewById(R.id.option1);
 		options_radiobutton[1] = (RadioButton) findViewById(R.id.option2);
@@ -334,7 +335,7 @@ public class TestPage extends Activity implements OnClickListener
 				{
 					if (options_radiobutton[i].isChecked())
 					{
-						b[click] = i+1;
+						chacked_answers[click] = i+1;
 						ans[click] = i+1;
 						gotoclick[click] = 1;
 					}
@@ -392,9 +393,10 @@ public class TestPage extends Activity implements OnClickListener
 
 										i.putExtra("score", ans);
 										i.putExtra("givenans", givenans);
-										i.putExtra("allid", a);
+										i.putExtra("allid", question_ids);
 										i.putExtra("tt", j);
-										i.putExtra("category", cat);
+										i.putExtra("sub_categry", cat);
+										i.putExtra("test_category", test_category);
 
 										startActivity(i);
 										TestPage.this.finish();
@@ -431,7 +433,7 @@ public class TestPage extends Activity implements OnClickListener
 				// FriendsActivity.class);
 				// startActivity(i);
 
-				int val = a[click];
+				int val = question_ids[click];
 				QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category], val, cat);
 				String ques = q.getQuestion();
 				String[] options = q.getOptions();
@@ -516,7 +518,7 @@ public class TestPage extends Activity implements OnClickListener
 
 		QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category],initial[count], cat);
 
-		a[index++] = initial[count];
+		question_ids[index++] = initial[count];
 		givenans[0] = initans[count];
 		t2.setText("   " + "1/20");
 		String j = q.getQuestion();
@@ -528,7 +530,7 @@ public class TestPage extends Activity implements OnClickListener
 		for (int x = 1; x < 20; x++) {
 			int k = (count + 1);
 			count = k;
-			a[index] = initial[k];
+			question_ids[index] = initial[k];
 			givenans[index] = initans[k];
 			index = index + 1;
 		}
@@ -557,10 +559,11 @@ public class TestPage extends Activity implements OnClickListener
 
 					click = click + 1;
 
-					int val = a[click];
-					int check = b[click];
+					int val = question_ids[click];
+					int check = chacked_answers[click];
 					
-					options_radiobutton[check+1].setChecked(true);
+					
+					
 
 					t2.setText("   " + (click + 1) + "/20");
 
@@ -571,6 +574,10 @@ public class TestPage extends Activity implements OnClickListener
 
 					
 					setUpQuestion(q);
+					
+					
+					if (check != -1)
+						options_radiobutton[check-1].setChecked(true);
 
 				}
 
@@ -597,10 +604,10 @@ public class TestPage extends Activity implements OnClickListener
 					radiogroup.clearCheck();
 
 					click = click - 1;
-					int val = a[click];
-					int check = b[click];
+					int val = question_ids[click];
+					int check = chacked_answers[click];	
 					
-					options_radiobutton[check+1].setChecked(true);
+					
 
 					QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category],val, cat);
 					// i=i+1;
@@ -609,6 +616,9 @@ public class TestPage extends Activity implements OnClickListener
 					t2.setText("   " + (click + 1) + "/20");
 					t1.setText(j);
 					setUpQuestion(q);
+					
+					if (check != -1)
+						options_radiobutton[check-1].setChecked(true);
 
 				}
 			}
@@ -682,8 +692,9 @@ public class TestPage extends Activity implements OnClickListener
 
 					i.putExtra("score", ans);
 					i.putExtra("givenans", givenans);
-					i.putExtra("allid", a);
-					i.putExtra("category", cat);
+					i.putExtra("allid", question_ids);
+					i.putExtra("sub_categry", cat);
+					i.putExtra("test_category", test_category);
 					startActivity(i);
 					TestPage.this.finish();
 

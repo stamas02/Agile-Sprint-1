@@ -17,7 +17,8 @@ import androidhive.dashboard.R;
 public class Result extends Activity {
 	TextView t1, t2, t3, t4, t5, t6, t7, t8;
 	int id = 0;
-	String cat = "";
+	String sub_category = "";
+	int test_category;
 	int allid[] = new int[40];
 	int yourans[] = new int[40];
 	int givenans[] = new int[40];
@@ -119,13 +120,14 @@ public class Result extends Activity {
 		id = Integer.parseInt(id1);
 		String curr = bundle.getString("current");
 		current = Integer.parseInt(curr);
-		cat = bundle.getString("Category");
+		sub_category = bundle.getString("sub_categry");
+		test_category = bundle.getInt("test_category");
 		yourans = bundle.getIntArray("yourans");
 		givenans = bundle.getIntArray("givenans");
 		allid = bundle.getIntArray("allid");
 
 		
-		QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
+		QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category],id, sub_category);
 
 		final Button btn_next = (Button) findViewById(R.id.btn_next);
 		final Button btn_prev = (Button) findViewById(R.id.btn_prev);
@@ -180,7 +182,7 @@ public class Result extends Activity {
 					btn_prev.setEnabled(true);
 					current = current + 1;
 					id = allid[current];
-					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category],id, sub_category);
 					String j = q.getQuestion();
 					String opt1 = q.getOptions()[0];
 					String opt2 = q.getOptions()[1];
@@ -233,7 +235,7 @@ public class Result extends Activity {
 					btn_prev.setEnabled(true);
 					current = current - 1;
 					id = allid[current];
-					QuestionRecord q = db.getQuestion(TABLE_NAMES.QUANTITIVE_TABLE,id, cat);
+					QuestionRecord q = db.getQuestion(TABLE_NAMES.values()[test_category],id, sub_category);
 					String j = q.getQuestion();
 					String opt1 = q.getOptions()[0];
 					String opt2 = q.getOptions()[1];
