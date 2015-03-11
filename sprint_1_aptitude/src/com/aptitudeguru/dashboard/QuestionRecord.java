@@ -52,7 +52,16 @@ public class QuestionRecord {
 
 
 	public String getQuestion() {
-		return this._questiontext;
+		String checkedTestQestion = "";
+		
+		if ( _questiontext.contains("Rs.") ) {
+			checkedTestQestion = _questiontext.replaceAll("Rs\\. ", "\\$");
+			return checkedTestQestion;
+		} else {
+			return this._questiontext;
+		}
+		
+		//return this._questiontext; 	// the original code of the method (yes, just that 1 line)
 	}
 
 	

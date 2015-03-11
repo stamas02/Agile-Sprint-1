@@ -138,16 +138,13 @@ public class TestPage extends Activity implements OnClickListener
 		if (click == 19) {
 			btn_next.setEnabled(false);
 			btn_next.setVisibility(View.INVISIBLE);
-
 		}
-
 		else {
 			btn_prev.setEnabled(true);
 			btn_next.setEnabled(true);
 			btn_next.setVisibility(View.VISIBLE);
 			btn_prev.setVisibility(View.VISIBLE);
-		}
-		
+		}		
 		for (RadioButton rb : options_radiobutton)
 			rb.setChecked(false);
 
