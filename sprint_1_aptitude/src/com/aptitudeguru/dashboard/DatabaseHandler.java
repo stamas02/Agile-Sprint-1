@@ -288,23 +288,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {				
 				QuestionRecord question = new QuestionRecord();
-				question.setID(Integer.parseInt(cursor.getString(0)));	// GO BACK TO THIS!
-							
 				
-				/*	that method was moved to the getQuestion method in QuestionRecord 
-				// fetch the question:	
-				String testQuestion = cursor.getString(1);	
-				String checkedTestQestion = "";
+				question.setID(Integer.parseInt(cursor.getString(0)));
+				//question.setID(Integer.parseInt("129"));	
 				
-				if ( testQuestion.contains("Rs.") ) {
-					checkedTestQestion = testQuestion.replaceAll("Rs.", "$");
-					question.setQuestion(checkedTestQestion);
-				} else {
-					question.setQuestion (testQuestion);
-				}
-				*/
-								
-				question.setQuestion(cursor.getString(1));	// the original statement to fetch a question
+				question.setQuestion(cursor.getString(1));
 				question.setCategory(cursor.getString(2));
 				String[] options = new String[]{cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6)};
 				question.setOptions(options);
@@ -404,12 +392,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_QUESTION_TEXT, question.getQuestion()); // Contact Name
 		values.put(KEY_CATEGORY, question.getCategory());
-		String[] options = question.getOptions();
-		values.put(KEY_OPTION1, options[0]);
-		values.put(KEY_OPTION2, options[1]);
-		values.put(KEY_OPTION3, options[2]);
-		values.put(KEY_OPTION4, options[3]);
-		values.put(KEY_SOLUTION, question.getSolution());
 
 		// updating row
 		return db.update((String) table_names_map.get(type), values, KEY_ID + " = ?",
