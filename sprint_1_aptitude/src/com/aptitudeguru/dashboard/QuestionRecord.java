@@ -1,5 +1,7 @@
 package com.aptitudeguru.dashboard;
 
+import java.util.Locale;
+
 public class QuestionRecord {
 
 	
@@ -52,10 +54,17 @@ public class QuestionRecord {
 
 
 	public String getQuestion() {
+		
 		String checkedTestQestion = "";
 		
-		if ( _questiontext.contains("Rs.") ) {
+		if ( Locale.getDefault().toString().contains("GB") && _questiontext.contains("Rs.") ) {
+			checkedTestQestion = _questiontext.replaceAll("Rs\\. ", "\\£");
+			return checkedTestQestion;
+		} if ( Locale.getDefault().toString().contains("US") && _questiontext.contains("Rs.") ) {
 			checkedTestQestion = _questiontext.replaceAll("Rs\\. ", "\\$");
+			return checkedTestQestion;
+		} if ( Locale.getDefault().toString().contains("FR") && _questiontext.contains("Rs.") ) {
+			checkedTestQestion = _questiontext.replaceAll("Rs\\. ", "\\€");
 			return checkedTestQestion;
 		} else {
 			return this._questiontext;
