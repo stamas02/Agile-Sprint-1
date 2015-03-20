@@ -288,10 +288,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {				
 				QuestionRecord question = new QuestionRecord();
-				
+
 				question.setID(Integer.parseInt(cursor.getString(0)));
-				//question.setID(Integer.parseInt("129"));	
-				
+				//question.setID(Integer.parseInt("192"));	//190
+					  								
 				question.setQuestion(cursor.getString(1));
 				question.setCategory(cursor.getString(2));
 				String[] options = new String[]{cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6)};
